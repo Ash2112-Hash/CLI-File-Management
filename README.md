@@ -1,4 +1,4 @@
-﻿# File Management (bash)
+﻿# File Management (bash and CLI)
 
 
 ## Synopsis ##
