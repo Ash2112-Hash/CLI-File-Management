@@ -1,0 +1,74 @@
+#!/bin/bash
+
+# displays the current name of the script being executed
+bname=`basename $0`
+echo "File Management: this is bash script named $bname"
+
+
+# Validates the number of command line arguments entered by user 
+# If incorrect of command line arguments are present, approriate message is displayed
+if [ $# -ne 3 ]
+then
+  echo "wrong number of command line arguments, execution aborted"
+  exit 1
+fi
+
+echo "Is it correct that the file must contain $1 (yes/no)"
+read response
+
+if [ "$response" == "no" ]
+then
+  echo "you requested abortion of execution"
+  exit 1
+elif [ "$response" != "yes" -a "$response" != "no" ]
+then 
+  echo "incorrect response, execution aborted"
+  exit 1
+fi
+
+echo "Is it correct that the source directory is $2 (yes/no)"
+read response2
+
+if [ "$response2" == "no" ]
+then
+  echo "you requested abortion of execution"
+  exit 1
+elif [ "$response2" != "yes" -a "$response2" != "no" ]
+then
+  echo "incorrect response, execution aborted"
+  exit 1
+fi
+
+echo "Is it correct that destination directory is $3 (yes/no)"
+read response3
+
+if [ "$response3" == "no" ]
+then
+  echo "you requested abortion of execution"
+  exit 1
+elif [ "$response3" != "yes" -a "$response3" != "no" ]
+then
+  echo "incorrect response, execution aborted"
+  exit 1
+fi
+
+echo "moving files containing $1 from $2 to $3"
+
+
+# checks every file in the current directory and moves files containing $1 from $2 to $3
+# Script terminates after moving the corresponding files in the current directory
+cd $2
+files=`ls`
+for file in $files
+do
+  if [ -f "$file" ]
+  then
+    x=`grep $1 $file`
+    if ! [ -z "$x" ]
+    then
+      mv $file $3
+    fi
+  fi
+done
+ 
+exit 1

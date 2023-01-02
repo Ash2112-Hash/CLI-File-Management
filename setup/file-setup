@@ -1,0 +1,38 @@
+#!/bin/bash
+
+
+# displays the current name of the script being executed
+bname=`basename $0`
+echo "File Management: this is bash prep script named $bname"
+
+
+# creates two new directories known as MYDIR1 and MYDIR2
+mkdir MYDIR1
+mkdir MYDIR2
+
+# changes current directory to MYDIR1
+cd MYDIR1
+
+# creates 9 text files in the MYDIR1 directory
+# contents of each file display its name and order of precedence in the MYDIR1 directory
+for ((i=0; i<=9; i++))
+do
+  echo "I am rep$i file" > rep$i
+  if [ "$i" == "0" ]
+  then
+    echo "and I am the first" >> rep$i
+  else
+    echo "and I have a predecessor rep$((i-1))" >> rep$i
+  fi
+
+  if [ "$i" == "9" ]
+  then
+    echo "and I am the last one" >> rep$i
+  else
+    echo "and I have a follower rep$((i+1))" >> rep$i
+  fi
+done
+
+
+# Script terminates after creating approriate files
+exit 1
